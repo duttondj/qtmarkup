@@ -51,17 +51,26 @@ bool is_h2(const string &str)
 // Find any italics in a string an return a properly formated HTML line
 string italics(const string &str)
 {
+	// Create new string from the passed one
 	string newstr = str;
+	
+	// Find first and second instance of *
 	size_t first = newstr.find("*");
 	size_t second = newstr.find("*",first+1);
 
+	// Make sure the first and second instances exist.
+	// Also make sure there is actual text between the *
+	// We want to ignore things like **
 	if (first != string::npos && second != string::npos && first != second-1)
 	{
+		// Replace first and second instances
 		newstr.replace(first, 1, "<i>");
 		newstr.replace(second+2, 1, "</i>");
 
+		// Use recursion to detect any other instances
 		return italics(newstr);
 	}
+	// There are no non-consecutive pairs of *
 	else
 	{
 		return newstr;
@@ -71,17 +80,25 @@ string italics(const string &str)
 // Find any bolds in a string an return a properly formated HTML line
 string bold(const string &str)
 {
+	// Create new string from the passed one
 	string newstr = str;
+	
+	// Find first and second instance of **
 	size_t first = newstr.find("**");
 	size_t second = newstr.find("**",first+1);
 
-	if (first != string::npos && second != string::npos)
+	// Make sure the first and second instances exist.
+	// Also make sure there is actual text between the **
+	// We want to ignore things like ****
+	if (first != string::npos && second != string::npos && first != second-2)
 	{
 		newstr.replace(first, 2, "<b>");
 		newstr.replace(second+1, 2, "</b>");
 
+		// Use recursion to detect any other instances
 		return bold(newstr);
 	}
+	// There are no non-consecutive pairs of **
 	else
 	{
 		return newstr;
@@ -161,9 +178,10 @@ int main(int argc, char **argv)
 			// We dont want to include any ====== or -----
 			if(!is_h1(markdown[i]) && !is_h2(markdown[i]))
 			{
-				temp = bold(markdown[i]);
-				temp = italics(temp);
-				html.push_back("<p>" + temp + "</p>");
+				// Pass the line through bold first to find any ** pairs
+				// and then pass it through italics to find any * pairs.
+				// Order does matter as italics can be tricked with nesting
+				html.push_back("<p>" + italics(bold(markdown[i])) + "</p>");
 			}
 		}
 	}
