@@ -51,10 +51,21 @@ bool is_h2(const string &str)
 // Find any italics in a string an return a properly formated HTML line
 string italics(const string &str)
 {
-	//string
-	//size_t found = 
+	string newstr = str;
+	size_t first = newstr.find("*");
+	size_t second = newstr.find("*",first+1);
 
-	return str;
+	if (first != string::npos && second != string::npos && first != second-1)
+	{
+		newstr.replace(first, 1, "<i>");
+		newstr.replace(second+2, 1, "</i>");
+
+		return italics(newstr);
+	}
+	else
+	{
+		return newstr;
+	}
 }
 
 // Find any bolds in a string an return a properly formated HTML line
@@ -151,6 +162,7 @@ int main(int argc, char **argv)
 			if(!is_h1(markdown[i]) && !is_h2(markdown[i]))
 			{
 				temp = bold(markdown[i]);
+				temp = italics(temp);
 				html.push_back("<p>" + temp + "</p>");
 			}
 		}
