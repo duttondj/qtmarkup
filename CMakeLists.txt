@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.2)
 project(QtMarkup CXX)
 
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
 FIND_PACKAGE(Qt4 REQUIRED)
 INCLUDE(${QT_USE_FILE})
 
@@ -8,6 +11,6 @@ QT4_WRAP_CPP(MOCSrcs)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 
-ADD_EXECUTABLE(qtmarkup main.cpp ${MOCSrcs})
+ADD_EXECUTABLE(qtmarkup main.cpp qtmarkup.cpp ${MOCSrcs})
 
-TARGET_LINK_LIBRARIES(qtmarkup Qt4::QtGui Qt4::QtWebKit)
+TARGET_LINK_LIBRARIES(qtmarkup Qt4::QtGui)

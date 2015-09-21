@@ -8,6 +8,7 @@
 #include <QTextEdit>
 #include <QTextStream>
 #include <QString>
+#include <QStringList>
 #include <cstdlib>
 #include <string>
 #include <vector>
@@ -23,13 +24,18 @@ class qtmarkup : public QMainWindow
 
 public:
     explicit qtmarkup(QWidget *parent = 0);
-    ~qtmarkup();
+    virtual ~qtmarkup();
     void keyPressEvent(QKeyEvent* e);
+
+private:
+    bool is_h1(const std::string &str, unsigned int width = 0);
+    bool is_h2(const std::string &str, unsigned int width = 0);
+    std::string italics(const std::string &str);
+    std::string bold(const std::string &str);
+    QString markupToHTML(QString str);
 
 private slots:
     void on_markupEdit_textChanged();
-    QString qtmarkup::markupToHTML(QString str);
-
 
 private:
     Ui::qtmarkup *ui;
