@@ -1,7 +1,7 @@
 #include "qtmarkup.h"
 #include "ui_qtmarkup.h"
 
-
+// Constructor function, creates UI
 qtmarkup::qtmarkup(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::qtmarkup)
@@ -9,12 +9,15 @@ qtmarkup::qtmarkup(QWidget *parent) :
     ui->setupUi(this);
 }
 
+// Destructor function
 qtmarkup::~qtmarkup()
 {
     delete ui;
 }
 
-
+// This function listens for keys being pressed, listens for C-o (open) and C-s (save)
+// Input: QKeyEvent* e
+// Output: Sends opened file to textEdit, saves converted HTML to file
 void qtmarkup::keyPressEvent(QKeyEvent* e)
 {
     // This is for any error messages to be displayed
@@ -66,7 +69,7 @@ void qtmarkup::keyPressEvent(QKeyEvent* e)
             {
                 // Write the contents of htmlEdit to the file
                 QTextStream stream(&filehtml);
-                stream << ui->htmlEdit->toHtml();
+                stream << htmlstr;
                 filehtml.flush();
             }
             // There was an issue so show an error
@@ -81,6 +84,8 @@ void qtmarkup::keyPressEvent(QKeyEvent* e)
 }
 
 // is_h1 will detect if a string contains only "=", the symbol for an h1 only if it is longer than width
+// Input: string &str of simple markdown and unsigned int width = 0
+// Output: bool stating if the string containing only "=" is longer than width (default value of zero)
 bool qtmarkup::is_h1(const std::string &str, unsigned int width) // width = 0
 {
     // Only check nonempty strings with a width at least the size of the line above
@@ -96,6 +101,8 @@ bool qtmarkup::is_h1(const std::string &str, unsigned int width) // width = 0
 }
 
 // is_h2 will detect if a string contains only "-", the symbol for an h2 only if it is longer than width
+// Input: string &str of simple markdown and unsigned int width = 0
+// Output: bool stating if the string containing only "-" is longer than width (default value of zero)
 bool qtmarkup::is_h2(const std::string &str, unsigned int width) // width = 0
 {
     // Only check nonempty strings with a width at least the size of the line above
@@ -110,6 +117,8 @@ bool qtmarkup::is_h2(const std::string &str, unsigned int width) // width = 0
 }
 
 // Find any italics in a string an return a properly formated HTML line
+// Input: string &str of simple markdown
+// Output: string that has replaced paired "*" with italics tags
 std::string qtmarkup::italics(const std::string &str)
 {
     // Create new string from the passed one
@@ -139,6 +148,8 @@ std::string qtmarkup::italics(const std::string &str)
 }
 
 // Find any bolds in a string an return a properly formated HTML line
+// Input: string &str of simple markdown
+// Output: string that has replaced paired "**" with bold tags
 std::string qtmarkup::bold(const std::string &str)
 {
     // Create new string from the passed one
@@ -167,6 +178,8 @@ std::string qtmarkup::bold(const std::string &str)
 }
 
 // Convert a qstring containing simple markdown to a qstring containing html
+// Input: QString str of simple markdown
+// Ouput: QString str of HTML
 QString qtmarkup::markupToHTML(QString str)
 {
     std::vector<std::string> markdown;	// Vector containing all lines in the MD file
@@ -232,19 +245,21 @@ QString qtmarkup::markupToHTML(QString str)
 }
 
 // When ever the markupEdit box changes, we want to update the htmlEdit box
+// Input: this is a slot listening for a signal
+// Output: Moves text in textEdit to markdownToHTML to htmlEdit
 void qtmarkup::on_markupEdit_textChanged()
 {
     // Dump the markupEdit contents to a single qstring
     QString markupstr = ui->markupEdit->toPlainText();
 
     // Save the output of markupToHTML as a string, input is the markupEdit contents
-    QString htmlstr = markupToHTML(markupstr);
+    htmlstr = markupToHTML(markupstr);
 
     // Clear the htmlEdit box since a lot of extra garbage will be created
     ui->htmlEdit->clear();
 
     // Set the htmlEdit contents to the new html text but display it as HTML rather than plain text
-    ui->htmlEdit->setText(ui->htmlEdit->toHtml()+htmlstr+"\n");
+    ui->htmlEdit->setText(ui->htmlEdit->toHtml()+htmlstr);
 
     // Set htmlEdit to be readonly
     ui->htmlEdit->setReadOnly(true);
