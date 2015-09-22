@@ -28,13 +28,13 @@ public:
     virtual ~qtmarkup();
     void keyPressEvent(QKeyEvent* e);
 
-private:
+    // These below should be private but not sure how to test them from the outside otherwise
     // Private variable to save the html output in so that htmlEdit doesn't introduce extra tags
     QString htmlstr;
 
     // Functions, documented in qtmarkup.cpp
-    bool is_h1(const std::string &str, unsigned int width = 0);
-    bool is_h2(const std::string &str, unsigned int width = 0);
+    bool is_h1(const std::string &str, unsigned int width = 1);
+    bool is_h2(const std::string &str, unsigned int width = 1);
     std::string italics(const std::string &str);
     std::string bold(const std::string &str);
     QString markupToHTML(QString str);

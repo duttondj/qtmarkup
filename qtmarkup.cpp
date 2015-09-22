@@ -35,12 +35,12 @@ void qtmarkup::keyPressEvent(QKeyEvent* e)
 
             QString line;
 
-            // Clear out the markupEdit box since we are loading a file
-            ui->markupEdit->clear();
-
             // Open the file as read only and as text
             if (file.open(QIODevice::ReadOnly | QIODevice::Text))
             {
+                // Clear out the markupEdit box since we are loading a file
+                ui->markupEdit->clear();
+
                 // Write every line to the markupEdit box
                 QTextStream stream(&file);
                 while (!stream.atEnd())
@@ -52,7 +52,7 @@ void qtmarkup::keyPressEvent(QKeyEvent* e)
             // There was an issue so show an error
             else
             {
-                box->setText(QString("Error with reading from file"));
+                box->setText(QString("Error: No file selected to open, try again"));
                 box->show();
             }
             file.close();
@@ -75,7 +75,7 @@ void qtmarkup::keyPressEvent(QKeyEvent* e)
             // There was an issue so show an error
             else
             {
-                box->setText(QString("Error with saving to file"));
+                box->setText(QString("Error: No valid save file selected, try again"));
                 box->show();
             }
             filehtml.close();
@@ -86,10 +86,10 @@ void qtmarkup::keyPressEvent(QKeyEvent* e)
 // is_h1 will detect if a string contains only "=", the symbol for an h1 only if it is longer than width
 // Input: string &str of simple markdown and unsigned int width = 0
 // Output: bool stating if the string containing only "=" is longer than width (default value of zero)
-bool qtmarkup::is_h1(const std::string &str, unsigned int width) // width = 0
+bool qtmarkup::is_h1(const std::string &str, unsigned int width) // width = 1
 {
     // Only check nonempty strings with a width at least the size of the line above
-    if (!str.empty() && str.size() >= width)
+    if (!str.empty() && str.size() >= width && width != 0)
     {
         return str.find_first_not_of("=") == std::string::npos;
     }
@@ -185,9 +185,9 @@ QString qtmarkup::markupToHTML(QString str)
     std::vector<std::string> markdown;	// Vector containing all lines in the MD file
     std::vector<std::string> html;		// Vector containing all lines in HTML file
     unsigned int i;						// Iterator for loops
-    QString outputstr;
-    QString temp;
+    QString outputstr;                  // Output QString to be returned
 
+    // Split up the QString so we can read each line
     QStringList list = str.split("\n");
     // Read all the lines in the file and add them to the markdown vector
     foreach(QString row, list)
