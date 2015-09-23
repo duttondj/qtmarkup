@@ -103,10 +103,10 @@ bool qtmarkup::is_h1(const std::string &str, unsigned int width) // width = 1
 // is_h2 will detect if a string contains only "-", the symbol for an h2 only if it is longer than width
 // Input: string &str of simple markdown and unsigned int width = 0
 // Output: bool stating if the string containing only "-" is longer than width (default value of zero)
-bool qtmarkup::is_h2(const std::string &str, unsigned int width) // width = 0
+bool qtmarkup::is_h2(const std::string &str, unsigned int width) // width = 1
 {
     // Only check nonempty strings with a width at least the size of the line above
-    if (!str.empty() && str.size() >= width)
+    if (!str.empty() && str.size() >= width && width != 0)
     {
         return str.find_first_not_of("-") == std::string::npos;
     }

@@ -1,6 +1,6 @@
-#include "qtmarkup.h"
 #include <QApplication>
 #include <QtWebKit/QWebView>
+#include "qtmarkup.h"
 
 int main(int argc, char *argv[])
 {
