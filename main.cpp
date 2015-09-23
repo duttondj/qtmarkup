@@ -1,3 +1,12 @@
+/*
+File: main.cpp
+Name: Danny Dutton
+Class: ECE3574
+Project: 1
+Description: This is the main function for qtmarkup. It creates the object 
+             and displays it.
+*/
+
 #include <QApplication>
 #include <QtWebKit/QWebView>
 #include "qtmarkup.h"

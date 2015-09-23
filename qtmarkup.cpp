@@ -1,3 +1,12 @@
+/*
+File: qtmarkup.cpp
+Name: Danny Dutton
+Class: ECE3574
+Project: 1
+Description: This is the cpp file for qtmarkup. It contains the function for
+             the class.
+*/
+
 #include "qtmarkup.h"
 #include "ui_qtmarkup.h"
 
@@ -182,9 +191,9 @@ std::string qtmarkup::bold(const std::string &str)
 // Ouput: QString str of HTML
 QString qtmarkup::markupToHTML(QString str)
 {
-    std::vector<std::string> markdown;	// Vector containing all lines in the MD file
-    std::vector<std::string> html;		// Vector containing all lines in HTML file
-    unsigned int i;						// Iterator for loops
+    std::vector<std::string> markdown;  // Vector containing all lines in the MD file
+    std::vector<std::string> html;      // Vector containing all lines in HTML file
+    unsigned int i;                     // Iterator for loops
     QString outputstr;                  // Output QString to be returned
 
     // Split up the QString so we can read each line

@@ -1,3 +1,12 @@
+/*
+File: qtmarkup.h
+Name: Danny Dutton
+Class: ECE3574
+Project: 1
+Description: This is the header file for qtmarkup. It contains the class
+             definition for qtmarkup.
+*/
+
 #ifndef QTMARKUP_H
 #define QTMARKUP_H
 

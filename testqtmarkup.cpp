@@ -1,3 +1,13 @@
+/*
+File: testqtmarkup.cpp
+Name: Danny Dutton
+Class: ECE3574
+Project: 1
+Description: This is the test module for qtmarkup. It contains
+             test functions that test the output of qtmarkup function
+             based on specified inputs.
+*/
+
 #include <QApplication>
 #include <QMainWindow>
 #include <QKeyEvent>
@@ -101,7 +111,7 @@ void TestQtMarkup::test_italicsbold()
                                             "**normal",
                                             "normal**",
                                             "<b>bold *bold</b>",
-                                            "<b>bold <i>bold</b> italics</i>"};	// Chrome displays this correctly but not Qt
+                                            "<b>bold <i>bold</b> italics</i>"}; // Chrome displays this correctly but not Qt
 
     // Run through each test and check results
 //    for(unsigned int i = 0; i < results.size(); i++)
