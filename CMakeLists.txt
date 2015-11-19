@@ -14,7 +14,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 
 # Tell cmake to look for moc files
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
+#set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # Add core Qt4 and Qt4Test
 FIND_PACKAGE(Qt4 REQUIRED QtGui QtTest)
