@@ -1,0 +1,1 @@
+/usr/bin/c++    -std=c++11 -g   CMakeFiles/testqtmarkup.dir/testqtmarkup.cpp.o CMakeFiles/testqtmarkup.dir/qtmarkup.cpp.o CMakeFiles/testqtmarkup.dir/testqtmarkup_automoc.cpp.o  -o testqtmarkup -rdynamic /usr/lib64/libQtGui.so /usr/lib64/libQtTest.so /usr/lib64/libQtCore.so 

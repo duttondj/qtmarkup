@@ -1,0 +1,1 @@
+set(AM_OLD_COMPILE_SETTINGS "QT_CORE_LIB;QT_GUI_LIB;QT_TEST_LIB ~~~ /usr/include/qt4;/usr/include/qt4/QtGui;/usr/include/qt4/QtTest;/home/danny/Dropbox/Fall2015/SoftwareDesign/P1/qtmarkup;/usr/include/qt4/QtCore;/usr/share/qt4/mkspecs/default ~~~  ~~~ FALSE ~~~ ")
